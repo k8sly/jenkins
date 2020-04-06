@@ -4,8 +4,10 @@ metadata:
   name: jenkins-server-a
   namespace: jenkins
 spec:
+  type: NodePort
   ports:
-  - port: 8003
+  - nodePort: 30020
+    port: 8003
     targetPort: 8080
   selector:
     app: jenkins-server-a
