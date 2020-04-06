@@ -44,19 +44,6 @@ spec:
               requests:
                 memory: "200Mi"
                 cpu: "200m"
-            volumeMounts:
-            - name: wwwroot
-              mountPath: /home/jenkins/
             ports:
              - containerPort: 8080
                name: jenkins
-        volumes:
-        - name: wwwroot
-          cephfs:
-            monitors:
-              - 192.168.95.128:6789
-            user: admin
-            path: /jenkins
-            secretRef:
-              name: ceph-secret
-        restartPolicy: OnFailure
