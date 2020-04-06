@@ -39,11 +39,11 @@ spec:
             imagePullPolicy: IfNotPresent
             resources:
               limits:
-                memory: "1Gi"
-                cpu: "1"
+                memory: "400Mi"
+                cpu: "400m"
               requests:
-                memory: "1Gi"
-                cpu: "1"
+                memory: "200Mi"
+                cpu: "200m"
             volumeMounts:
             - name: wwwroot
               mountPath: /home
