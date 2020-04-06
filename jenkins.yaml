@@ -36,6 +36,26 @@ spec:
         containers:
           - name: jenkins-server-a
             image: "192.168.95.129:5000/jenkins:1.0.0"
+            imagePullPolicy: IfNotPresent
+            resources:
+              limits:
+                memory: "1Gi"
+                cpu: "1"
+              requests:
+                memory: "1Gi"
+                cpu: "1"
+            volumeMounts:
+            - name: wwwroot
+              mountPath: /home/jenkins/
             ports:
              - containerPort: 8080
                name: jenkins
+        volumes:
+        - name: wwwroot
+          cephfs:
+            monitors:
+              - 192.168.95.128:6789
+            user: admin
+            path: /jenkins
+            secretRef:
+              name: ceph-secret
