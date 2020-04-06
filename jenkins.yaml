@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-server-a
+  namespace: ingress-nginx
+spec:
+  ports:
+  - port: 8003
+    targetPort: 8080
+  selector:
+    app: jenkins-server-a
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jenkins-server-a
+  namespace: ingress-nginx
+  labels:
+    app: jenkins-server-a
+spec:
+  replicas: 3
+  minReadySeconds: 10  # 这里需要估一个比较合理的值，从容器启动到应用正常提供服务
+  strategy:  # k8s 默认的 strategy 就是 RollingUpdate， 这里写明出来可以调节细节参数
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3  # 更新时允许最大激增的容器数，默认 replicas 的 1/4 向上取整
+      maxUnavailable: 2  # 更新时允许最大 unavailable 容器数，默认 replicas 的 1/4 向下取整
+  template:
+      metadata:
+        labels:
+          app: jenkins-server-a
+      spec:
+        containers:
+          - name: jenkins-server-a
+            image: "172.16.41.25:5000/jenkins:1.0.0"
+            ports:
+             - containerPort: 8080
+               name: jenkins
