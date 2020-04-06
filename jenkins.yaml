@@ -46,7 +46,7 @@ spec:
                 cpu: "1"
             volumeMounts:
             - name: wwwroot
-              mountPath: /home/jenkins/
+              mountPath: /home/jenkins/logs
             ports:
              - containerPort: 8080
                name: jenkins
