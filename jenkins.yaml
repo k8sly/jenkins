@@ -54,7 +54,7 @@ spec:
         - name: wwwroot
           cephfs:
             monitors:
-              - 192.168.95.128:6789
+              - 192.168.95.133:6789
             user: admin
             path: /jenkins
             secretRef:
