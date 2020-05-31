@@ -35,7 +35,7 @@ spec:
         nodeName: nice-03
         containers:
           - name: jenkins-server-a
-            image: "192.168.95.129:5000/jenkins:1.0.0"
+            image: "192.168.95.131:5000/jenkins:0.0.1"
             imagePullPolicy: IfNotPresent
             resources:
               limits:
